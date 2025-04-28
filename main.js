@@ -46,6 +46,7 @@ async function main() {
         let pr = core.getInput("pr")
         let commit = core.getInput("commit")
         let branch = core.getInput("branch")
+        let ref = core.getInput("ref")
         let event = core.getInput("event")
         let runID = core.getInput("run_id")
         let runNumber = core.getInput("run_number")
@@ -74,6 +75,7 @@ async function main() {
                 "pr": pr,
                 "commit": commit,
                 "branch": branch,
+                "ref": ref,
                 "run_id": runID
             }
         ]
@@ -105,6 +107,10 @@ async function main() {
             core.info(`==> Branch: ${branch}`)
         }
 
+        if (ref) {
+            core.info(`==> Ref (tag): ${branch}`)
+        }
+
         if (event) {
             core.info(`==> Event: ${event}`)
         }
@@ -123,6 +129,7 @@ async function main() {
                 repo: repo,
                 ...(workflow ? { workflow_id: workflow } : {}),
                 ...(branch ? { branch } : {}),
+                ...(ref ? { ref } : {}),
                 ...(event ? { event } : {}),
                 ...(commit ? { head_sha: commit } : {}),
             }

@@ -6,9 +6,9 @@ Let's suppose you have a workflow with a job in it that at the end uploads an ar
 
 ## Usage
 
-> If `commit` or `pr` or `branch` or `run_id` or `workflow_conclusion` is not specified then the artifact from the most recent successfully completed workflow run will be downloaded.
+> If `commit` or `pr` or `branch` or `ref` or `run_id` or `workflow_conclusion` is not specified then the artifact from the most recent successfully completed workflow run will be downloaded.
 
-**Do not specify `pr`, `commit`, `branch`, `run_id` together or `workflow_conclusion` and `run_id` together. Pick just one of each or none.**
+**Do not specify `pr`, `commit`, `branch`, `ref`, `run_id` together or `workflow_conclusion` and `run_id` together. Pick just one of each or none.**
 
 ```yaml
 - name: Download artifact
@@ -38,6 +38,8 @@ Let's suppose you have a workflow with a job in it that at the end uploads an ar
     commit: ${{github.event.pull_request.head.sha}}
     # Optional, will use the specified branch. Defaults to all branches
     branch: master
+    # Optional, will use the specified ref (tag). Defaults to all refs
+    ref: v1.0.0
     # Optional, defaults to all types
     event: push
     # Optional, will use specified workflow run
